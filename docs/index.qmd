@@ -1,0 +1,27 @@
+---
+title: "(More) reproducible data analysis in R using {targets}"
+subtitle: "Warwick R User Group, University of Warwick, UK"
+date: "2024/11/05"
+author: "Saranjeet Kaur Bhogal"
+institute: Imperial College London
+format: 
+  revealjs:
+    incremental: true
+    slide-number: true
+    show-slide-number: all
+    footer: "SaranjeetKaur.github.io/reproducible-analysis-targets/"
+execute: 
+  echo: false
+  warning: false
+  cache: true
+  freeze: true
+---
+
+# Show of hands {background-colour="aquamarine"}
+
+- Who uses R?
+- Who has heard of {targets}?
+
+# Motivation
+
+- Why do we need reproducible data analysis?
