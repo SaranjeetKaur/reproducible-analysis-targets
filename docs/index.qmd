@@ -1,7 +1,7 @@
 ---
-title: "(More) reproducible data analysis in R using {targets}"
+title: "(More) Reproducible Data Analysis in R using {targets}"
 subtitle: "Warwick R User Group, University of Warwick, UK"
-date: "2024/11/05"
+date: "2024/12/05"
 author: "Saranjeet Kaur Bhogal"
 institute: Imperial College London
 format: 
@@ -15,13 +15,98 @@ execute:
   warning: false
   cache: true
   freeze: true
+from: markdown+emoji
 ---
-
-# Show of hands {background-colour="aquamarine"}
-
-- Who uses R?
-- Who has heard of {targets}?
 
 # Motivation
 
-- Why do we need reproducible data analysis?
+- What is reproducibility?
+- Ability for others (including your future self) to reproduce your analysis.
+- Reproducibility is not a binary concept.
+- There is a scale from less reproducible to more reproducible. 
+- There are various tools and practices can help enhance it.
+- {targets} is one such tool.
+- Be your own best collaborator! (you are helping your future self!) :smiley:
+
+# Show of hands
+
+- Who uses R?
+- Who has heard of {targets}? 
+
+# What does {targets} really do?
+
+- Working with data analysis projects can get messy sometimes. :confused:
+- You might be working on an analysis and then have to stop and work on something else :stop_sign: ...
+
+# ... What happens next?
+
+- When you come back, there is a chance that you forgot what you were doing. :confused: 
+- What would you do in this situation? Re-run the whole analysis? :thinking:
+
+# ... What if I told you ...
+
+- There is a better way! {targets} can help you with this! :smiley:
+- {targets} can support to immediately pick up where you left off without confusion or trying to remember what you were doing. :tada:
+- I will be demonstrating how to use {targets} in a data analysis project today! :computer:
+
+# Acknowledgements
+
+- Will Landau: Developed and maintains {targets}
+- Nick Tierney: For his inspiring talk on {targets} at RSECon24
+- Joel Nitta: For his Carpentries workshop on {targets}
+
+# Plan for today
+
+- Slides / analysis is on github: [saranjeetkaur/reproducible-analysis-targets](https://github.com/SaranjeetKaur/reproducible-analysis-targets)
+- Attempt to live coding! :snowflake:
+- You can follow along or ask questions! :question:
+
+## How to follow along
+
+- Not designed as a code along (but,you are welcome to try!)
+- Might be best to observe, take notes, ask questions
+
+# Data for the analysis: {palmerpenguins}
+
+[![palmerpenguins logo](logo_penguins.png)](https://allisonhorst.github.io/palmerpenguins/)
+
+# [palmerpenguins](https://github.com/allisonhorst/palmerpenguins)
+
+The three species of penguins in the palmerpenguins dataset. Artwork by @allison_horst
+
+[![The three species of penguins in the palmerpenguins dataset. Artwork by @allison_horst.](lter_penguins.png)](https://github.com/allisonhorst/palmerpenguins)
+
+# Let's get started!
+
+# Some more things to try
+
+- 
+
+# Thanks
+
+- Will Landau
+- Nick Tierney
+- Alison Horst
+- Joel Nitta
+
+# Resources
+
+- <https://books.ropensci.org/targets/>
+- <https://github.com/njtierney/gentle-intro-targets>
+- <https://carpentries-incubator.github.io/targets-workshop/>
+
+# Slides
+
+- Slides made using [quarto](https://github.com/quarto-dev/quarto)
+
+# Learning more
+
+- [targets](https://books.ropensci.org/targets/)
+
+- [talk link](saranjeetkaur.github.io/reproducible-analysis-targets/)
+
+- GitHub: SaranjeetKaur
+
+- Email: kaur.saranjeet3\@gmail.com
+
+# **Thank you!**

@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Saranjeet Kaur Bhogal">
-  <meta name="dcterms.date" content="2024-11-05">
-  <title>(More) reproducible data analysis in R using {targets}</title>
+  <meta name="dcterms.date" content="2024-12-05">
+  <title>(More) Reproducible Data Analysis in R using {targets}</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,7 +327,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">(More) reproducible data analysis in R using {targets}</h1>
+  <h1 class="title">(More) Reproducible Data Analysis in R using {targets}</h1>
   <p class="subtitle">Warwick R User Group, University of Warwick, UK</p>
 
 <div class="quarto-title-authors">
@@ -341,9 +341,22 @@ Saranjeet Kaur Bhogal
     </div>
 </div>
 
-  <p class="date">2024-11-05</p>
+  <p class="date">2024-12-05</p>
 </section>
-<section id="show-of-hands" class="title-slide slide level1 center" data-background-colour="aquamarine">
+<section id="motivation" class="title-slide slide level1 center">
+<h1>Motivation</h1>
+<ul>
+<li class="fragment">What is reproducibility?</li>
+<li class="fragment">Ability for others (including your future self) to reproduce your analysis.</li>
+<li class="fragment">Reproducibility is not a binary concept.</li>
+<li class="fragment">There is a scale from less reproducible to more reproducible.</li>
+<li class="fragment">There are various tools and practices can help enhance it.</li>
+<li class="fragment">{targets} is one such tool.</li>
+<li class="fragment">Be your own best collaborator! (you are helping your future self!) <span class="emoji" data-emoji="smiley">😃</span></li>
+</ul>
+</section>
+
+<section id="show-of-hands" class="title-slide slide level1 center">
 <h1>Show of hands</h1>
 <ul>
 <li class="fragment">Who uses R?</li>
@@ -351,14 +364,130 @@ Saranjeet Kaur Bhogal
 </ul>
 </section>
 
-<section id="motivation" class="title-slide slide level1 center">
-<h1>Motivation</h1>
+<section id="what-does-targets-really-do" class="title-slide slide level1 center">
+<h1>What does {targets} really do?</h1>
 <ul>
-<li class="fragment">Why do we need reproducible data analysis?</li>
+<li class="fragment">Working with data analysis projects can get messy sometimes. <span class="emoji" data-emoji="confused">😕</span></li>
+<li class="fragment">You might be working on an analysis and then have to stop and work on something else <span class="emoji" data-emoji="stop_sign">🛑</span> …</li>
 </ul>
+</section>
+
+<section id="what-happens-next" class="title-slide slide level1 center">
+<h1>… What happens next?</h1>
+<ul>
+<li class="fragment">When you come back, there is a chance that you forgot what you were doing. <span class="emoji" data-emoji="confused">😕</span></li>
+<li class="fragment">What would you do in this situation? Re-run the whole analysis? <span class="emoji" data-emoji="thinking">🤔</span></li>
+</ul>
+</section>
+
+<section id="what-if-i-told-you" class="title-slide slide level1 center">
+<h1>… What if I told you …</h1>
+<ul>
+<li class="fragment">There is a better way! {targets} can help you with this! <span class="emoji" data-emoji="smiley">😃</span></li>
+<li class="fragment">{targets} can support to immediately pick up where you left off without confusion or trying to remember what you were doing. <span class="emoji" data-emoji="tada">🎉</span></li>
+<li class="fragment">I will be demonstrating how to use {targets} in a data analysis project today! <span class="emoji" data-emoji="computer">💻</span></li>
+</ul>
+</section>
+
+<section id="acknowledgements" class="title-slide slide level1 center">
+<h1>Acknowledgements</h1>
+<ul>
+<li class="fragment">Will Landau: Developed and maintains {targets}</li>
+<li class="fragment">Nick Tierney: For his inspiring talk on {targets} at RSECon24</li>
+<li class="fragment">Joel Nitta: For his Carpentries workshop on {targets}</li>
+</ul>
+</section>
+
+<section>
+<section id="plan-for-today" class="title-slide slide level1 center">
+<h1>Plan for today</h1>
+<ul>
+<li class="fragment">Slides / analysis is on github: <a href="https://github.com/SaranjeetKaur/reproducible-analysis-targets">saranjeetkaur/reproducible-analysis-targets</a></li>
+<li class="fragment">Attempt to live coding! <span class="emoji" data-emoji="snowflake">❄️</span></li>
+<li class="fragment">You can follow along or ask questions! <span class="emoji" data-emoji="question">❓</span></li>
+</ul>
+</section>
+<section id="how-to-follow-along" class="slide level2">
+<h2>How to follow along</h2>
+<ul>
+<li class="fragment">Not designed as a code along (but,you are welcome to try!)</li>
+<li class="fragment">Might be best to observe, take notes, ask questions</li>
+</ul>
+</section></section>
+<section id="data-for-the-analysis-palmerpenguins" class="title-slide slide level1 center">
+<h1>Data for the analysis: {palmerpenguins}</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://allisonhorst.github.io/palmerpenguins/"><img data-src="logo_penguins.png" alt="palmerpenguins logo"></a></p>
+<figcaption>palmerpenguins logo</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="palmerpenguins" class="title-slide slide level1 center">
+<h1><a href="https://github.com/allisonhorst/palmerpenguins">palmerpenguins</a></h1>
+<p>The three species of penguins in the palmerpenguins dataset. Artwork by <span class="citation" data-cites="allison_horst">@allison_horst</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://github.com/allisonhorst/palmerpenguins"><img data-src="lter_penguins.png" alt="The three species of penguins in the palmerpenguins dataset. Artwork by @allison_horst."></a></p>
+<figcaption>The three species of penguins in the palmerpenguins dataset. Artwork by <span class="citation" data-cites="allison_horst">@allison_horst</span>.</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="lets-get-started" class="title-slide slide level1 center">
+<h1>Let’s get started!</h1>
+
+</section>
+
+<section id="some-more-things-to-try" class="title-slide slide level1 center">
+<h1>Some more things to try</h1>
+<ul>
+<li class="fragment"></li>
+</ul>
+</section>
+
+<section id="thanks" class="title-slide slide level1 center">
+<h1>Thanks</h1>
+<ul>
+<li class="fragment">Will Landau</li>
+<li class="fragment">Nick Tierney</li>
+<li class="fragment">Alison Horst</li>
+<li class="fragment">Joel Nitta</li>
+</ul>
+</section>
+
+<section id="resources" class="title-slide slide level1 center">
+<h1>Resources</h1>
+<ul>
+<li class="fragment"><a href="https://books.ropensci.org/targets/" class="uri">https://books.ropensci.org/targets/</a></li>
+<li class="fragment"><a href="https://github.com/njtierney/gentle-intro-targets" class="uri">https://github.com/njtierney/gentle-intro-targets</a></li>
+<li class="fragment"><a href="https://carpentries-incubator.github.io/targets-workshop/" class="uri">https://carpentries-incubator.github.io/targets-workshop/</a></li>
+</ul>
+</section>
+
+<section id="slides" class="title-slide slide level1 center">
+<h1>Slides</h1>
+<ul>
+<li class="fragment">Slides made using <a href="https://github.com/quarto-dev/quarto">quarto</a></li>
+</ul>
+</section>
+
+<section id="learning-more" class="title-slide slide level1 center">
+<h1>Learning more</h1>
+<ul>
+<li class="fragment"><p><a href="https://books.ropensci.org/targets/">targets</a></p></li>
+<li class="fragment"><p><a href="saranjeetkaur.github.io/reproducible-analysis-targets/">talk link</a></p></li>
+<li class="fragment"><p>GitHub: SaranjeetKaur</p></li>
+<li class="fragment"><p>Email: kaur.saranjeet3@gmail.com</p></li>
+</ul>
+</section>
+
+<section id="thank-you" class="title-slide slide level1 center">
+<h1><strong>Thank you!</strong></h1>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>SaranjeetKaur.github.io/reproducible-analysis-targets/</p>
+<p>saranjeetkaur.github.io/reproducible-analysis-targets/</p>
 </div>
 </div>
 </section>
