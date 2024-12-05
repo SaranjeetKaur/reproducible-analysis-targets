@@ -2,7 +2,8 @@ Process: remember to add commits for each phase, to log the process
 
 Analysis without using {targets}
 
-- Load packages
+- Let's create a new file using `file.create("runme.R").
+- Install required packages.
 
 ```r
 install.packages(
