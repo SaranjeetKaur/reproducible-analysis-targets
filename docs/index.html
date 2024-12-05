@@ -392,9 +392,10 @@ Saranjeet Kaur Bhogal
 <section id="acknowledgements" class="title-slide slide level1 center">
 <h1>Acknowledgements</h1>
 <ul>
-<li class="fragment">Will Landau: Developed and maintains {targets}</li>
-<li class="fragment">Nick Tierney: For his inspiring talk on {targets} at RSECon24</li>
+<li class="fragment">Allison Horst, Alison Presmanes Hill, Kristen Gorman: For the {palmerpenguins} package</li>
 <li class="fragment">Joel Nitta: For his Carpentries workshop on {targets}</li>
+<li class="fragment">Nick Tierney: For his talk on {targets} at RSECon24</li>
+<li class="fragment">Will Landau: Developed and maintains {targets}</li>
 </ul>
 </section>
 
@@ -410,7 +411,7 @@ Saranjeet Kaur Bhogal
 <section id="how-to-follow-along" class="slide level2">
 <h2>How to follow along</h2>
 <ul>
-<li class="fragment">Not designed as a code along (but,you are welcome to try!)</li>
+<li class="fragment">Not designed as a code along (but, you are welcome to try!)</li>
 <li class="fragment">Might be best to observe, take notes, ask questions</li>
 </ul>
 </section></section>
@@ -440,20 +441,32 @@ Saranjeet Kaur Bhogal
 
 </section>
 
+<section id="some-takeaways" class="title-slide slide level1 center">
+<h1>Some takeaways …</h1>
+<ul>
+<li class="fragment">Use only one active <code>_targets.R</code> file at a time in a given project.</li>
+<li class="fragment">The <code>_targets.R</code> file should be placed at the top level/root directory of your project.</li>
+<li class="fragment">Use <code>targets::tar_make()</code> to run and <code>targets::tar_visnetwork()</code> to visualise the workflow.</li>
+<li class="fragment">Even if you close your R session, then re-start it and use <code>targets::tar_load()</code> or <code>targets::tar_read()</code>, you will still be able to read load/read the workflow objects. In other words, the workflow output is saved across R sessions.</li>
+</ul>
+</section>
+
 <section id="some-more-things-to-try" class="title-slide slide level1 center">
 <h1>Some more things to try</h1>
 <ul>
-<li class="fragment"></li>
+<li class="fragment">How to work with external files? (<code>tarchetypes::tar_file()</code>)</li>
+<li class="fragment">Organise the functions better, instead of a single <code>functions.R</code> file.</li>
+<li class="fragment">Explore making reports using <code>tarchetypes::tar_quarto</code>.</li>
 </ul>
 </section>
 
 <section id="thanks" class="title-slide slide level1 center">
 <h1>Thanks</h1>
 <ul>
-<li class="fragment">Will Landau</li>
-<li class="fragment">Nick Tierney</li>
-<li class="fragment">Alison Horst</li>
+<li class="fragment">Allison Horst, Alison Presmanes Hill, Kristen Gorman</li>
 <li class="fragment">Joel Nitta</li>
+<li class="fragment">Nick Tierney</li>
+<li class="fragment">Will Landau</li>
 </ul>
 </section>
 
@@ -476,8 +489,8 @@ Saranjeet Kaur Bhogal
 <section id="learning-more" class="title-slide slide level1 center">
 <h1>Learning more</h1>
 <ul>
-<li class="fragment"><p><a href="https://books.ropensci.org/targets/">targets</a></p></li>
-<li class="fragment"><p><a href="saranjeetkaur.github.io/reproducible-analysis-targets/">talk link</a></p></li>
+<li class="fragment"><p>About targets: https://books.ropensci.org/targets/</p></li>
+<li class="fragment"><p>talk link: saranjeetkaur.github.io/reproducible-analysis-targets/</p></li>
 <li class="fragment"><p>GitHub: SaranjeetKaur</p></li>
 <li class="fragment"><p>Email: kaur.saranjeet3@gmail.com</p></li>
 </ul>

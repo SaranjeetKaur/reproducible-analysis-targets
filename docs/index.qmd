@@ -51,9 +51,10 @@ from: markdown+emoji
 
 # Acknowledgements
 
-- Will Landau: Developed and maintains {targets}
-- Nick Tierney: For his inspiring talk on {targets} at RSECon24
+- Allison Horst, Alison Presmanes Hill, Kristen Gorman: For the {palmerpenguins} package
 - Joel Nitta: For his Carpentries workshop on {targets}
+- Nick Tierney: For his talk on {targets} at RSECon24
+- Will Landau: Developed and maintains {targets}
 
 # Plan for today
 
@@ -63,7 +64,7 @@ from: markdown+emoji
 
 ## How to follow along
 
-- Not designed as a code along (but,you are welcome to try!)
+- Not designed as a code along (but, you are welcome to try!)
 - Might be best to observe, take notes, ask questions
 
 # Data for the analysis: {palmerpenguins}
@@ -78,16 +79,25 @@ The three species of penguins in the palmerpenguins dataset. Artwork by @allison
 
 # Let's get started!
 
+# Some takeaways ...
+
+- Use only one active `_targets.R` file at a time in a given project.
+- The `_targets.R` file should be placed at the top level/root directory of your project.
+- Use `targets::tar_make()` to run and `targets::tar_visnetwork()` to visualise the workflow.
+- Even if you close your R session, then re-start it and use `targets::tar_load()` or `targets::tar_read()`, you will still be able to read load/read the workflow objects. In other words, the workflow output is saved across R sessions.
+
 # Some more things to try
 
-- 
+- How to work with external files? (`tarchetypes::tar_file()`)
+- Organise the functions better, instead of a single `functions.R` file.
+- Explore making reports using `tarchetypes::tar_quarto`.
 
 # Thanks
 
-- Will Landau
-- Nick Tierney
-- Alison Horst
+- Allison Horst, Alison Presmanes Hill, Kristen Gorman
 - Joel Nitta
+- Nick Tierney
+- Will Landau
 
 # Resources
 
@@ -101,9 +111,9 @@ The three species of penguins in the palmerpenguins dataset. Artwork by @allison
 
 # Learning more
 
-- [targets](https://books.ropensci.org/targets/)
+- About targets: https://books.ropensci.org/targets/
 
-- [talk link](saranjeetkaur.github.io/reproducible-analysis-targets/)
+- talk link: saranjeetkaur.github.io/reproducible-analysis-targets/
 
 - GitHub: SaranjeetKaur
 
