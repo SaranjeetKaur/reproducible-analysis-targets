@@ -1,6 +1,6 @@
 Process: remember to add commits for each phase, to log the process
 
-Phase 1 (Without {targets})
+Analysis without using {targets}
 
 - Load packages
 
@@ -131,7 +131,7 @@ interaction_predictions <- broom::augment(interaction_model)
 - So far, we have cleaned the data, plotted it, and fit some models without using {targets}.
 - What questions do you have?
 
-Phase 2 (With {targets})
+Analysis using {targets}
 
 - Every `targets` project must include a special file, called `_targets.R`
 - This file should be in the main project folder (the “project root”). 
@@ -189,13 +189,40 @@ clean_penguins_data <- function(penguins_data_raw) {
 }
 ```
 
-- Now let's add this function to the list in the `_targets.R` file and run the workflow using `targets::tar_make()`.
+- Now let's add this function to the list in the `_targets.R` file.
+
+```r
+clean_penguins_data <- function(penguins_data_raw) {
+  colnames(penguins_data_raw) <- janitor::make_clean_names(colnames(penguins_data_raw))
+  penguins_data_raw |>
+    # subset to only the columns needed for analysis
+    dplyr::select(
+      species,
+      culmen_length_mm,
+      culmen_depth_mm
+    ) |>
+    # Delete rows with missing data
+    ggplot2::remove_missing(na.rm = TRUE)
+}
+
+list(
+  targets::tar_target(penguins_csv_file,
+             palmerpenguins::path_to_file("penguins_raw.csv")),
+  targets::tar_target(penguins_data_raw,
+             readr::read_csv(penguins_csv_file,
+                             show_col_types = FALSE)),
+  targets::tar_target(penguins_data,
+                      clean_penguins_data(penguins_data_raw))
+  )
+```
+
+- Let's run the workflow using `targets::tar_make()`.
 - Notice how the earlier two steps are skipped and only the new step in the workflow  is dispatched.
 - Let's visualise the workflow using `targets::tar_visnetwork()`.
 
 - What questions do you have?
 
-- Let's add the plotting step to the workflow, include it in the list, and visualise the workflow.
+- Let's add the plotting step to the workflow, include it in the list.
 
 ```r
 gg_penguins <- function(penguins_data){
@@ -225,6 +252,7 @@ list(
   )
 ```
 
+- Let's run the workflow using `targets::tar_make()` and visualise it using `targets::tar_visnetwork()`.
 - Now if you try to look for the object `plot_penguins`, you will get an error that the object cannot be found.
 - This is because the object is only available in the workflow, not in the global environment.
 - So where are the results of the workflow stored?
@@ -249,6 +277,24 @@ plot_penguins # Should now be available and also loaded in the current session e
 - Say, we decide that the species names should be shorter. 
 - Right have the common name and the scientific name.
 - Let's only keep the first part of the common name by modifying the `clean_penquins_data` function in the `_targets.R` file.
+
+```r
+clean_penguins_data <- function(penguins_data_raw) {
+  colnames(penguins_data_raw) <- janitor::make_clean_names(colnames(penguins_data_raw))
+  penguins_data_raw |>
+    # subset to only the columns needed for analysis
+    dplyr::select(
+      species,
+      culmen_length_mm,
+      culmen_depth_mm
+    ) |>
+    # Delete rows with missing data
+    ggplot2::remove_missing(na.rm = TRUE)
+    # Split "species" apart on spaces, and only keep the first word
+    tidyr::separate(species, into = "species", extra = "drop")
+}
+```
+
 - Now let's try to visualise the workflow using `targets::tar_visnetwork()`.
 - Notice the dark green targets - they are the ones that are up to date.
 - The light blue colour indicates that target is outdated.
@@ -319,7 +365,7 @@ tarchetypes::tar_plan(
   )
 )
 ```
-
+- Run the workflow using `targets::tar_make()`.
 - Let's load `combined_model` and use the `broom::glance()` function to get the summary of the model.
 
 ```r
@@ -361,13 +407,13 @@ tarchetypes::tar_plan(
 )
 ```
 
+- Run the workflow using `targets::tar_make()`.
 - This works. 
 - But remember, we were talking about this approach being repetitive and manual, hence, may lead to typos?
 - This can be overcome using the branching feature of `targets`.
 - It is a way to define many targets from a single line of code.
 - This saves you typing and reduces the risk of typos.
-- Now we try dynamic branching in the workflow.
-- Let's add the `broom::augment()` function to the workflow.
+- Now we will try dynamic branching in the workflow.
   - It will provide a single specification to make the targets (the “pattern”).
   - Which will generate multiple targets from it (“branches”).
   - Being “Dynamic” implies that the branches (from the pattern) do not have to be defined in advance instead they are a dynamic result of the code.
@@ -389,12 +435,6 @@ models = list(
 ```
 
 - Also change the model summarises.
-- `model_summaries` is the target name.
-- `broom::glance(models[[1]])` is the command to build the target.
-- It is applied to each element of `models`.
-- [[1]]: removes one layer of nesting
-- pattern: indicates that this target should be built using dynamic branching. 
-- map: applies the command to each element of the input list (models) sequentially.
 
 ```r
 targets::tar_target(
@@ -403,6 +443,14 @@ targets::tar_target(
     pattern = map(models)
   )
 ```
+
+- `model_summaries` is the target name.
+- `broom::glance(models[[1]])` is the command to build the target.
+- It is applied to each element of `models`.
+- [[1]]: removes one layer of nesting
+- pattern: indicates that this target should be built using dynamic branching. 
+- map: applies the command to each element of the input list (models) sequentially.
+
 
 - Let's reflect on the output of `targets::tar_make()`.
 - Series of smaller targets (branches) that are each named like `model_summaries_alphanumeric_hash`.
@@ -466,3 +514,6 @@ targets::tar_target(
   pattern = map(models)
 )
 ```
+
+- Run the workflow using `targets::tar_make()`.
+- Visualise the workflow using `targets::tar_visnetwork()`.
