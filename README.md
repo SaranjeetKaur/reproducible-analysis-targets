@@ -11,4 +11,4 @@ This session will provide an introduction to using {targets} for reproducible da
 
 ## Meetup details
 
-This session will be presented at the Warwick R User Group meetup at the University of Warwick on Dec 5, 2024.
+This session was presented at the Warwick R User Group meetup at the University of Warwick on Dec 5, 2024.
